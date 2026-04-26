@@ -33,6 +33,7 @@ struct RuntimeDesc {
     uint32_t width = 1280;
     uint32_t height = 720;
     const char* assetRoot = "assets";
+    const char* textureRoot = nullptr;
 };
 
 } // namespace MoonRender

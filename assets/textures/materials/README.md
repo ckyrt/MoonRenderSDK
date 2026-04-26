@@ -1,22 +1,13 @@
-# Material Texture Pack
+# User Material Textures
 
-Reusable material textures belong to the SDK, but the current Moon material texture set is large.
+MoonRenderSDK does not require material textures to be stored in this repository.
 
-Current Moon source size:
+Applications provide their own local texture root through `RuntimeDesc::textureRoot` or explicit file paths in `MaterialDesc::textures`.
 
-- PNG textures: about 922 MB
-- metadata files: small
-
-Do not commit the full PNG set as ordinary Git blobs. Package it as one of:
-
-- GitHub Release asset: `MoonRenderSDK-MaterialTextures.zip`
-- Git LFS tracked files
-- internal binary artifact package
-
-Expected runtime layout after unpacking:
+Recommended runtime layout:
 
 ```text
-assets/textures/materials/
+{textureRoot}/materials/
   Concrete044D_2K-PNG/
   Brick_2K-PNG/
   Wood049_2K-PNG/
@@ -29,3 +20,12 @@ assets/textures/materials/
   Plastic018A_2K-PNG/
   Rubber_2K-PNG/
 ```
+
+Default texture suffixes:
+
+- `_Color.png`
+- `_NormalDX.png`
+- `_AmbientOcclusion.png`
+- `_Roughness.png`
+- `_Metalness.png`
+- `_Opacity.png`

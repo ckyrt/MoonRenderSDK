@@ -7,7 +7,8 @@ The SDK is intended to own:
 - window/runtime/world APIs
 - scene creation helpers
 - materials and material presets
-- texture and shader assets
+- shader assets
+- user-provided material texture loading
 - PBR rendering
 - sky, weather, fog, wind, lights, and shadows
 - terrain, water, river, ocean, grass, and shrub runtime visuals
@@ -50,7 +51,7 @@ MoonRenderSDK/
   bin/x64/Release/MoonRenderSDK.lib
 ```
 
-Large material textures are distributed as a release asset / texture pack, not committed directly as normal Git blobs.
+Material textures are supplied by the application. The SDK defines texture slots and naming rules, but it does not require a built-in material texture library.
 
 In another Visual Studio project:
 
@@ -58,6 +59,56 @@ In another Visual Studio project:
 - add `MoonRenderSDK/bin/x64/Release` to Additional Library Directories
 - link `MoonRenderSDK.lib`
 - copy `MoonRenderSDK.dll` next to the executable
+- provide a local texture root through `RuntimeDesc::textureRoot` or absolute texture paths in material descriptors
+
+## Material Textures
+
+Applications can provide textures in either of two ways.
+
+Direct file paths:
+
+```cpp
+world.CreateMaterial({
+    .preset = MoonRender::MaterialPreset::ConcreteFloor,
+    .mapping = MoonRender::MappingMode::Triplanar,
+    .textures = {
+        .albedo = "D:/ProjectAssets/materials/concrete/concrete_Color.png",
+        .normal = "D:/ProjectAssets/materials/concrete/concrete_NormalDX.png",
+        .ambientOcclusion = "D:/ProjectAssets/materials/concrete/concrete_AmbientOcclusion.png",
+        .roughness = "D:/ProjectAssets/materials/concrete/concrete_Roughness.png",
+        .metalness = "D:/ProjectAssets/materials/concrete/concrete_Metalness.png"
+    }
+});
+```
+
+Folder convention:
+
+```cpp
+runtime.Initialize({
+    .appName = "External Project",
+    .width = 1280,
+    .height = 720,
+    .assetRoot = "D:/ProjectAssets",
+    .textureRoot = "D:/ProjectAssets/textures"
+});
+
+world.CreateMaterial({
+    .preset = MoonRender::MaterialPreset::WoodFloor,
+    .textureConvention = {
+        .materialFolder = "materials/WoodFloor_2K-PNG"
+    }
+});
+```
+
+With the default convention, the SDK searches for:
+
+```text
+{textureRoot}/{materialFolder}/*_Color.png
+{textureRoot}/{materialFolder}/*_NormalDX.png
+{textureRoot}/{materialFolder}/*_AmbientOcclusion.png
+{textureRoot}/{materialFolder}/*_Roughness.png
+{textureRoot}/{materialFolder}/*_Metalness.png
+```
 
 ## Migration Notes
 
@@ -75,7 +126,7 @@ These sources are not all wired into the DLL project yet. They still need:
 - asset root configuration using `RuntimeDesc::assetRoot`
 - replacement of hard-coded Moon paths
 - public-handle wrappers over internal scene/material/light/terrain objects
-- material texture pack publishing
+- user texture root resolution and convention-based texture discovery
 
 ## Example
 

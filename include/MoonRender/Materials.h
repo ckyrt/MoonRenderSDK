@@ -38,6 +38,32 @@ enum class ShadingModel {
     Foliage
 };
 
+enum class NormalMapConvention {
+    DirectX,
+    OpenGL
+};
+
+struct TextureSetDesc {
+    const char* albedo = nullptr;
+    const char* normal = nullptr;
+    const char* ambientOcclusion = nullptr;
+    const char* roughness = nullptr;
+    const char* metalness = nullptr;
+    const char* opacity = nullptr;
+};
+
+struct MaterialTextureConvention {
+    const char* materialFolder = nullptr;
+    const char* albedoSuffix = "_Color";
+    const char* normalSuffix = "_NormalDX";
+    const char* ambientOcclusionSuffix = "_AmbientOcclusion";
+    const char* roughnessSuffix = "_Roughness";
+    const char* metalnessSuffix = "_Metalness";
+    const char* opacitySuffix = "_Opacity";
+    const char* extension = ".png";
+    NormalMapConvention normalConvention = NormalMapConvention::DirectX;
+};
+
 struct MaterialDesc {
     MaterialPreset preset = MaterialPreset::None;
     MappingMode mapping = MappingMode::UV;
@@ -47,6 +73,8 @@ struct MaterialDesc {
     float roughness = 0.5f;
     float opacity = 1.0f;
     float tiling = 1.0f;
+    TextureSetDesc textures = {};
+    MaterialTextureConvention textureConvention = {};
 };
 
 } // namespace MoonRender
