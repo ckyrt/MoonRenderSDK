@@ -17,7 +17,7 @@ Moon itself should consume this SDK as a dependency. Editor, AI, building author
 
 ## Current Status
 
-This repository currently contains the public API skeleton, Visual Studio DLL build layout, and the first migrated Moon runtime source payload under `src/moon`. The next step is wiring that payload behind the public SDK handles and removing Moon-specific paths.
+This repository currently contains the public API skeleton, Visual Studio DLL build layout, a working Win32 runtime window/message loop, and the first migrated Moon runtime source payload under `src/moon`. The next step is wiring the renderer payload behind the public SDK handles and removing Moon-specific paths.
 
 ## Layout
 
@@ -127,6 +127,8 @@ These sources are not all wired into the DLL project yet. They still need:
 - replacement of hard-coded Moon paths
 - public-handle wrappers over internal scene/material/light/terrain objects
 - user texture root resolution and convention-based texture discovery
+
+The public runtime layer now owns Win32 window creation and message polling. External applications can create the SDK runtime, receive the native window handle through `Runtime::GetWindowHandle()`, and keep the render loop alive with `Runtime::PollEvents()` without cloning Moon.
 
 ## Example
 
