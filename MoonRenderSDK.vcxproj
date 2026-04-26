@@ -50,16 +50,18 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;MOONRENDER_BUILD_DLL;WIN32_LEAN_AND_MEAN;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;MOONRENDER_BUILD_DLL;WIN32_LEAN_AND_MEAN;NOMINMAX;DILIGENT_DEVELOPMENT=1;D3D11_SUPPORTED=1;PLATFORM_WIN32=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)src;$(ProjectDir)src\moon\engine;$(ProjectDir)..\DiligentEngine;$(ProjectDir)..\DiligentEngine\DiligentCore;$(ProjectDir)..\DiligentEngine\DiligentCore\Graphics\GraphicsEngine\interface;$(ProjectDir)..\DiligentEngine\DiligentCore\Graphics\GraphicsEngineD3D11\interface;$(ProjectDir)..\DiligentEngine\DiligentCore\Common\interface;$(ProjectDir)..\DiligentEngine\DiligentCore\Platforms\interface;$(ProjectDir)..\DiligentEngine\DiligentCore\Platforms\Win32\interface;$(ProjectDir)..\DiligentEngine\DiligentCore\Primitives\interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\GraphicsEngineD3D11\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\GraphicsEngineD3DBase\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\GraphicsEngine\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\ShaderTools\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Common\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Platforms\Win32\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Platforms\Basic\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Primitives\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\ThirdParty\SPIRV-Tools\source\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\ThirdParty\SPIRV-Tools\source\opt\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\ThirdParty\glslang\glslang\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\ThirdParty\glslang\SPIRV\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\ThirdParty\SPIRV-Cross\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\GraphicsAccessories\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\HLSL2GLSLConverterLib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Diligent-GraphicsEngineD3D11-static.lib;Diligent-GraphicsEngineD3DBase.lib;Diligent-GraphicsEngine.lib;Diligent-ShaderTools.lib;Diligent-Common.lib;Diligent-Win32Platform.lib;Diligent-BasicPlatform.lib;Diligent-Primitives.lib;SPIRV-Tools.lib;SPIRV-Tools-opt.lib;glslangd.lib;SPIRVd.lib;spirv-cross-cored.lib;Diligent-GraphicsAccessories.lib;Diligent-HLSL2GLSLConverterLib.lib;d3d11.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -69,10 +71,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;MOONRENDER_BUILD_DLL;WIN32_LEAN_AND_MEAN;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;MOONRENDER_BUILD_DLL;WIN32_LEAN_AND_MEAN;NOMINMAX;DILIGENT_DEVELOPMENT=1;D3D11_SUPPORTED=1;PLATFORM_WIN32=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)src;$(ProjectDir)src\moon\engine;$(ProjectDir)..\DiligentEngine;$(ProjectDir)..\DiligentEngine\DiligentCore;$(ProjectDir)..\DiligentEngine\DiligentCore\Graphics\GraphicsEngine\interface;$(ProjectDir)..\DiligentEngine\DiligentCore\Graphics\GraphicsEngineD3D11\interface;$(ProjectDir)..\DiligentEngine\DiligentCore\Common\interface;$(ProjectDir)..\DiligentEngine\DiligentCore\Platforms\interface;$(ProjectDir)..\DiligentEngine\DiligentCore\Platforms\Win32\interface;$(ProjectDir)..\DiligentEngine\DiligentCore\Primitives\interface;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -81,10 +83,13 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\GraphicsEngineD3D11\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\GraphicsEngineD3DBase\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\GraphicsEngine\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\ShaderTools\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Common\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Platforms\Win32\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Platforms\Basic\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Primitives\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\ThirdParty\SPIRV-Tools\source\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\ThirdParty\SPIRV-Tools\source\opt\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\ThirdParty\glslang\glslang\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\ThirdParty\glslang\SPIRV\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\ThirdParty\SPIRV-Cross\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\GraphicsAccessories\$(Configuration);$(ProjectDir)..\DiligentEngine\build\DiligentCore\Graphics\HLSL2GLSLConverterLib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Diligent-GraphicsEngineD3D11-static.lib;Diligent-GraphicsEngineD3DBase.lib;Diligent-GraphicsEngine.lib;Diligent-ShaderTools.lib;Diligent-Common.lib;Diligent-Win32Platform.lib;Diligent-BasicPlatform.lib;Diligent-Primitives.lib;SPIRV-Tools.lib;SPIRV-Tools-opt.lib;glslang.lib;SPIRV.lib;spirv-cross-core.lib;Diligent-GraphicsAccessories.lib;Diligent-HLSL2GLSLConverterLib.lib;d3d11.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\SdkInternal.h" />
     <ClInclude Include="include\MoonRender\Camera.h" />
     <ClInclude Include="include\MoonRender\Environment.h" />
     <ClInclude Include="include\MoonRender\Export.h" />
@@ -99,6 +104,39 @@
     <ClInclude Include="include\MoonRender\World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\moon\engine\core\Assets\AssetPaths.cpp" />
+    <ClCompile Include="src\moon\engine\core\Assets\MeshManager.cpp" />
+    <ClCompile Include="src\moon\engine\core\Camera\Camera.cpp" />
+    <ClCompile Include="src\moon\engine\core\Camera\PerspectiveCamera.cpp" />
+    <ClCompile Include="src\moon\engine\core\Geometry\MeshGenerator.cpp" />
+    <ClCompile Include="src\moon\engine\core\Geometry\Path.cpp" />
+    <ClCompile Include="src\moon\engine\core\Geometry\PathMeshBuilder.cpp" />
+    <ClCompile Include="src\moon\engine\core\Logging\Logger.cpp" />
+    <ClCompile Include="src\moon\engine\core\Mesh\Mesh.cpp" />
+    <ClCompile Include="src\moon\engine\core\Scene\Component.cpp" />
+    <ClCompile Include="src\moon\engine\core\Scene\Light.cpp" />
+    <ClCompile Include="src\moon\engine\core\Scene\Material.cpp" />
+    <ClCompile Include="src\moon\engine\core\Scene\MeshRenderer.cpp" />
+    <ClCompile Include="src\moon\engine\core\Scene\Scene.cpp" />
+    <ClCompile Include="src\moon\engine\core\Scene\SceneNode.cpp" />
+    <ClCompile Include="src\moon\engine\core\Scene\Skybox.cpp" />
+    <ClCompile Include="src\moon\engine\core\Scene\Transform.cpp" />
+    <ClCompile Include="src\moon\engine\core\Texture\TextureManager.cpp" />
+    <ClCompile Include="src\moon\engine\environment\EnvironmentComponent.cpp" />
+    <ClCompile Include="src\moon\engine\environment\EnvironmentSystem.cpp" />
+    <ClCompile Include="src\moon\engine\render\BgfxRendererStub.cpp" />
+    <ClCompile Include="src\moon\engine\render\diligent\DiligentRenderer.cpp" />
+    <ClCompile Include="src\moon\engine\render\diligent\DiligentRendererIBL.cpp" />
+    <ClCompile Include="src\moon\engine\render\diligent\DiligentRendererInit.cpp" />
+    <ClCompile Include="src\moon\engine\render\diligent\DiligentRendererPicking.cpp" />
+    <ClCompile Include="src\moon\engine\render\diligent\DiligentRendererResources.cpp" />
+    <ClCompile Include="src\moon\engine\render\diligent\DiligentRendererUtils.cpp" />
+    <ClCompile Include="src\moon\engine\render\NullRenderer.cpp" />
+    <ClCompile Include="src\moon\engine\render\SceneRenderer.cpp" />
+    <ClCompile Include="src\moon\engine\terrain\ProceduralTerrainGenerator.cpp" />
+    <ClCompile Include="src\moon\engine\terrain\TerrainComponent.cpp" />
+    <ClCompile Include="src\moon\engine\terrain\TerrainSystem.cpp" />
+    <ClCompile Include="src\moon\engine\terrain\TerrainVisualBuilder.cpp" />
     <ClCompile Include="src\Runtime.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\World.cpp" />

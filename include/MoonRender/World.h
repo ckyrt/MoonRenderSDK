@@ -10,8 +10,13 @@
 #include "Types.h"
 
 #include <cstdint>
+#include <memory>
 
 namespace MoonRender {
+
+namespace detail {
+struct WorldState;
+}
 
 class MOONRENDER_API World {
 public:
@@ -33,10 +38,11 @@ public:
     void SetWind(const WindDesc& desc);
 
 private:
-    uint32_t m_nextEntityId = 1;
-    uint32_t m_nextMaterialId = 1;
-    uint32_t m_nextMeshId = 1;
-    uint32_t m_nextCameraId = 1;
+    std::shared_ptr<detail::WorldState> m_state;
+
+    explicit World(std::shared_ptr<detail::WorldState> state);
+
+    friend class Runtime;
 };
 
 } // namespace MoonRender

@@ -17,7 +17,7 @@ Moon itself should consume this SDK as a dependency. Editor, AI, building author
 
 ## Current Status
 
-This repository currently contains the public API skeleton, Visual Studio DLL build layout, a working Win32 runtime window/message loop, and the first migrated Moon runtime source payload under `src/moon`. The next step is wiring the renderer payload behind the public SDK handles and removing Moon-specific paths.
+This repository now contains the public API, Win32 runtime window/message loop, real scene/world creation, Diligent-backed rendering, and the migrated Moon render/environment/terrain runtime compiled into the SDK DLL.
 
 ## Layout
 
@@ -31,6 +31,11 @@ src/moon/             Migrated Moon runtime source payload being adapted into th
 ```
 
 ## Build
+
+Build prerequisites for SDK development:
+
+- Visual Studio 2022
+- the DiligentEngine source tree and build output available beside this repository during SDK development builds
 
 Open `MoonRenderSDK.sln` in Visual Studio 2022 and build `Release|x64`.
 
@@ -120,13 +125,13 @@ The existing Moon runtime implementation has started moving into `src/moon/engin
 - `terrain`: terrain runtime, procedural terrain, river/ocean/grass builders
 - `assets/shaders`: runtime shader files
 
-These sources are not all wired into the DLL project yet. They still need:
+These sources are now wired into the DLL project for:
 
-- Diligent dependency packaging inside SDK or a clear binary dependency layout
-- asset root configuration using `RuntimeDesc::assetRoot`
-- replacement of hard-coded Moon paths
-- public-handle wrappers over internal scene/material/light/terrain objects
-- user texture root resolution and convention-based texture discovery
+- runtime window creation and event polling
+- scene, camera, material, sky, weather, light, water, and terrain creation
+- Diligent-backed frame rendering through `Runtime::Render(World&)`
+- asset root and texture root configuration through `RuntimeDesc`
+- convention-based texture discovery for user-supplied material folders
 
 The public runtime layer now owns Win32 window creation and message polling. External applications can create the SDK runtime, receive the native window handle through `Runtime::GetWindowHandle()`, and keep the render loop alive with `Runtime::PollEvents()` without cloning Moon.
 

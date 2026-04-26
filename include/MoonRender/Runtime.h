@@ -5,7 +5,13 @@
 #include "Window.h"
 #include "World.h"
 
+#include <memory>
+
 namespace MoonRender {
+
+namespace detail {
+struct RuntimeState;
+}
 
 class MOONRENDER_API Runtime {
 public:
@@ -19,6 +25,7 @@ public:
     World CreateWorld();
 
 private:
+    std::shared_ptr<detail::RuntimeState> m_state;
     Window m_window;
     bool m_initialized = false;
 };
