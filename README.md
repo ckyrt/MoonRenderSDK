@@ -16,7 +16,7 @@ Moon itself should consume this SDK as a dependency. Editor, AI, building author
 
 ## Current Status
 
-This repository currently contains the public API skeleton and Visual Studio DLL build layout. The next migration step is to move the existing runtime implementation from Moon into this SDK behind the public API.
+This repository currently contains the public API skeleton, Visual Studio DLL build layout, and the first migrated Moon runtime source payload under `src/moon`. The next step is wiring that payload behind the public SDK handles and removing Moon-specific paths.
 
 ## Layout
 
@@ -26,6 +26,7 @@ src/                  DLL implementation
 assets/               Runtime shaders and material assets shipped to users
 examples/             External usage examples
 bin/x64/Release/      Built MoonRenderSDK.dll and import library
+src/moon/             Migrated Moon runtime source payload being adapted into the DLL
 ```
 
 ## Build
@@ -49,12 +50,32 @@ MoonRenderSDK/
   bin/x64/Release/MoonRenderSDK.lib
 ```
 
+Large material textures are distributed as a release asset / texture pack, not committed directly as normal Git blobs.
+
 In another Visual Studio project:
 
 - add `MoonRenderSDK/include` to Additional Include Directories
 - add `MoonRenderSDK/bin/x64/Release` to Additional Library Directories
 - link `MoonRenderSDK.lib`
 - copy `MoonRenderSDK.dll` next to the executable
+
+## Migration Notes
+
+The existing Moon runtime implementation has started moving into `src/moon/engine`:
+
+- `core`: math, camera, input, scene, mesh, geometry, assets, texture
+- `render`: renderer interfaces and Diligent renderer implementation
+- `environment`: time of day, weather, wind, atmosphere
+- `terrain`: terrain runtime, procedural terrain, river/ocean/grass builders
+- `assets/shaders`: runtime shader files
+
+These sources are not all wired into the DLL project yet. They still need:
+
+- Diligent dependency packaging inside SDK or a clear binary dependency layout
+- asset root configuration using `RuntimeDesc::assetRoot`
+- replacement of hard-coded Moon paths
+- public-handle wrappers over internal scene/material/light/terrain objects
+- material texture pack publishing
 
 ## Example
 
