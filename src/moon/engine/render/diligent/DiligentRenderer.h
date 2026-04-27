@@ -6,7 +6,7 @@
 #include <unordered_map>
 
 #include "../../core/Camera/Camera.h"
-#include "../../external/DiligentEngine/DiligentCore/Common/interface/RefCntAutoPtr.hpp"
+#include "Common/interface/RefCntAutoPtr.hpp"
 #include "Graphics/GraphicsEngine/interface/GraphicsTypes.h"
 #include "../IRenderer.h"
 

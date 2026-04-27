@@ -35,7 +35,8 @@ src/moon/             Migrated Moon runtime source payload being adapted into th
 Build prerequisites for SDK development:
 
 - Visual Studio 2022
-- the DiligentEngine source tree and build output available beside this repository during SDK development builds
+- initialize `third_party/DiligentEngine`
+- build the DiligentEngine solution under `third_party/DiligentEngine/build` for `Debug|x64` and `Release|x64`
 
 Open `MoonRenderSDK.sln` in Visual Studio 2022 and build `Release|x64`.
 

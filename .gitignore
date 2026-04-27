@@ -4,3 +4,4 @@ temp/
 *.user
 *.suo
 *.log
+third_party/DiligentEngine/build/
